@@ -1,0 +1,74 @@
+{
+    "192.168.50.2": {
+        "device_info": {
+            "host": "192.168.50.2",
+            "platform": "cisco_ios",
+            "uptime": "R1 uptime is 5 hours, 52 minutes",
+            "memory_usage": {
+                "Free Memory": "Head"
+            }
+        },
+        "interfaces_info": [
+            {
+                "interface": "FastEthernet0/0",
+                "ip_address": "192.168.50.2",
+                "status": "manual",
+                "protocol": "up"
+            },
+            {
+                "interface": "GigabitEthernet1/0",
+                "ip_address": "192.168.2.1",
+                "status": "manual",
+                "protocol": "up"
+            }
+        ],
+        "logs_info": "Syslog logging: enabled (0 messages dropped, 2 messages rate-limited,\n                0 flushes, 0 overruns, xml disabled, filtering disabled)\n\nNo Active Message Discriminator.\n\n\n\nNo Inactive Message Discriminator.\n\n\n    Console logging: level debugging, 38 messages logged, xml disabled,\n                     filtering disabled\n    Monitor logging: level debugging, 0 messages logged, xml disabled,\n                     filtering disabled\n    Buffer logging:  level debugging, 38 messages logged, xml disabled,\n                     filtering disabled\n    Logging Exception size (8192 bytes)\n    Count and timestamp logging messages: disabled\n    Persistent logging: disabled\n\nNo active filter modules.\n\nESM: 0 messages dropped\n\n    Trap logging: level informational, 41 message lines logged\n\nLog Buffer (8192 bytes):\n\n*Jan  5 13:59:00.015: % Error opening nvram:/ifIndex-table No such file or directory\n*Jan  5 13:59:07.099: %LINEPROTO-5-UPDOWN: Line protocol on Interface VoIP-Null0, changed state to up\n*Jan  5 13:59:07.103: %LINK-3-UPDOWN: Interface FastEthernet0/0, changed state to up\n*Jan  5 13:59:07.303: %SYS-5-CONFIG_I: Configured from memory by console\n*Jan  5 13:59:07.539: %SYS-5-RESTART: System restarted --\nCisco IOS Software, 7200 Software (C7200-ADVENTERPRISEK9-M), Version 12.4(24)T5, RELEASE SOFTWARE (fc3)\nTechnical Support: http://www.cisco.com/techsupport\nCopyright (c) 1986-2011 by Cisco Systems, Inc.\nCompiled Fri 04-Mar-11 06:49 by prod_rel_team\n*Jan  5 13:59:07.555: %SNMP-5-COLDSTART: SNMP agent on host R1 is undergoing a cold start\n*Jan  5 13:59:07.595: %CRYPTO-6-ISAKMP_ON_OFF: ISAKMP is OFF\n*Jan  5 13:59:07.599: %CRYPTO-6-GDOI_ON_OFF: GDOI is OFF\n*Jan  5 13:59:08.119: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to down\n*Jan  5 13:59:09.303: %LINK-5-CHANGED: Interface FastEthernet0/0, changed state to administratively down\n*Jan  5 14:00:57.255: %LINK-3-UPDOWN: Interface FastEthernet0/0, changed state to up\n*Jan  5 14:00:58.255: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to up\n*Jan  5 14:01:19.107: %SSH-5-ENABLED: SSH 1.99 has been enabled\n*Jan  5 14:01:28.563: %SYS-5-CONFIG_I: Configured from console by console\n*Jan  5 14:05:29.351: %SYS-5-CONFIG_I: Configured from console by console\n*Jan  5 14:06:18.379: %OIR-6-INSCARD: Card inserted in slot 1, interfaces administratively shut down\n*Jan  5 14:06:22.051: %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet1/0, changed state to down\n*Jan  5 14:09:11.663: %LINK-3-UPDOWN: Interface GigabitEthernet1/0, changed state to up\n*Jan  5 14:09:12.663: %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet1/0, changed state to up\n*Jan  5 14:09:14.759: %SYS-5-CONFIG_I: Configured from console by console\n*Jan  5 14:53:15.971: %SYS-5-CONFIG_I: Configured from console by console\n*Jan  5 14:54:20.159: %SYS-5-CONFIG_I: Configured from console by console\n*Jan  5 14:59:12.099: %LINK-3-UPDOWN: Interface FastEthernet0/0, changed state to down\n*Jan  5 14:59:13.099: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to down\n*Jan  5 14:59:33.099: %LINK-3-UPDOWN: Interface FastEthernet0/0, changed state to up\n*Jan  5 14:59:34.099: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to up\n*Jan  5 15:59:25.835: %SYS-5-CONFIG_I: Configured from console by admin on vty0 (192.168.50.1)\n*Jan  5 16:00:14.199: %SYS-5-CONFIG_I: Configured from console by admin on vty0 (192.168.50.1)\n*Jan  5 16:01:06.411: %SYS-5-CONFIG_I: Configured from console by admin on vty0 (192.168.50.1)\n*Jan  5 16:02:15.707: %SYS-5-CONFIG_I: Configured from console by admin on vty0 (192.168.50.1)\n*Jan  5 16:02:48.291: %SYS-5-CONFIG_I: Configured from console by admin on vty0 (192.168.50.1)\n*Jan  5 16:04:23.019: %SYS-5-CONFIG_I: Configured from console by admin on vty0 (192.168.50.1)\n*Jan  5 16:13:02.039: %SYS-5-CONFIG_I: Configured from console by console\n*Jan  5 16:13:44.563: %SYS-5-CONFIG_I: Configured from console by console\n*Jan  5 16:14:14.455: %SYS-5-CONFIG_I: Configured from console by console\n*Jan  5 16:15:36.543: %SYS-5-CONFIG_I: Configured from console by console\n*Jan  5 16:18:15.931: %SYS-5-CONFIG_I: Configured from console by console\n*Jan  5 16:18:34.031: %SYS-5-CONFIG_I: Configured from console by console",
+        "ssh_info": "SSH Enabled - version 1.99\nAuthentication timeout: 120 secs; Authentication retries: 3\nMinimum expected Diffie Hellman key size : 1024 bits"
+    },
+    "192.168.50.3": {
+        "device_info": {
+            "host": "192.168.50.3",
+            "platform": "cisco_ios",
+            "uptime": "192.168.50.3 uptime is 5 hours, 49 minutes",
+            "memory_usage": {
+                "Free Memory": "Head"
+            }
+        },
+        "interfaces_info": [
+            {
+                "interface": "FastEthernet0/0",
+                "ip_address": "192.168.50.3",
+                "status": "manual",
+                "protocol": "up"
+            },
+            {
+                "interface": "GigabitEthernet3/0",
+                "ip_address": "unassigned",
+                "status": "unset",
+                "protocol": "administratively"
+            }
+        ],
+        "logs_info": "Syslog logging: enabled (0 messages dropped, 2 messages rate-limited,\n                0 flushes, 0 overruns, xml disabled, filtering disabled)\n\nNo Active Message Discriminator.\n\n\n\nNo Inactive Message Discriminator.\n\n\n    Console logging: level debugging, 29 messages logged, xml disabled,\n                     filtering disabled\n    Monitor logging: level debugging, 0 messages logged, xml disabled,\n                     filtering disabled\n    Buffer logging:  level debugging, 29 messages logged, xml disabled,\n                     filtering disabled\n    Logging Exception size (8192 bytes)\n    Count and timestamp logging messages: disabled\n    Persistent logging: disabled\n\nNo active filter modules.\n\nESM: 0 messages dropped\n\n    Trap logging: level informational, 32 message lines logged\n\nLog Buffer (8192 bytes):\n\n*Jan  5 13:59:00.015: % Error opening nvram:/ifIndex-table No such file or directory\n*Jan  5 13:59:07.103: %LINEPROTO-5-UPDOWN: Line protocol on Interface VoIP-Null0, changed state to up\n*Jan  5 13:59:07.107: %LINK-3-UPDOWN: Interface FastEthernet0/0, changed state to down\n*Jan  5 13:59:07.291: %SYS-5-CONFIG_I: Configured from memory by console\n*Jan  5 13:59:07.543: %SYS-5-RESTART: System restarted --\nCisco IOS Software, 7200 Software (C7200-ADVENTERPRISEK9-M), Version 12.4(24)T5, RELEASE SOFTWARE (fc3)\nTechnical Support: http://www.cisco.com/techsupport\nCopyright (c) 1986-2011 by Cisco Systems, Inc.\nCompiled Fri 04-Mar-11 06:49 by prod_rel_team\n*Jan  5 13:59:07.559: %SNMP-5-COLDSTART: SNMP agent on host R2 is undergoing a cold start\n*Jan  5 13:59:07.603: %CRYPTO-6-ISAKMP_ON_OFF: ISAKMP is OFF\n*Jan  5 13:59:07.603: %CRYPTO-6-GDOI_ON_OFF: GDOI is OFF\n*Jan  5 13:59:08.123: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to down\n*Jan  5 13:59:09.291: %LINK-5-CHANGED: Interface FastEthernet0/0, changed state to administratively down\n*Jan  5 14:04:13.887: %OIR-3-SEATED: Insert/removal failed for slot 1, check card seating\n*Jan  5 14:04:13.887: %OIR-3-SEATED: Insert/removal failed for slot 2, check card seating\n*Jan  5 14:04:13.887: %OIR-6-INSCARD: Card inserted in slot 3, interfaces administratively shut down\n*Jan  5 14:04:17.587: %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet3/0, changed state to down\n*Jan  5 14:07:00.667: %LINK-3-UPDOWN: Interface FastEthernet0/0, changed state to up\n*Jan  5 14:07:01.667: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to up\n*Jan  5 14:07:07.511: %SYS-5-CONFIG_I: Configured from console by console\n*Jan  5 14:45:38.103: %LINK-3-UPDOWN: Interface FastEthernet0/0, changed state to down\n*Jan  5 14:45:39.103: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to down\n*Jan  5 14:57:51.103: %LINK-3-UPDOWN: Interface FastEthernet0/0, changed state to up\n*Jan  5 14:57:52.103: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to up\n*Jan  5 15:04:21.423: %SSH-5-ENABLED: SSH 1.99 has been enabled\n*Jan  5 15:05:04.955: %SYS-5-CONFIG_I: Configured from console by console\n*Jan  5 15:56:18.347: %SYS-5-CONFIG_I: Configured from console by admin on vty0 (192.168.50.1)\n*Jan  5 15:57:06.723: %SYS-5-CONFIG_I: Configured from console by admin on vty0 (192.168.50.1)\n*Jan  5 15:57:58.967: %SYS-5-CONFIG_I: Configured from console by admin on vty0 (192.168.50.1)\n*Jan  5 15:59:08.279: %SYS-5-CONFIG_I: Configured from console by admin on vty0 (192.168.50.1)\n*Jan  5 15:59:40.851: %SYS-5-CONFIG_I: Configured from console by admin on vty0 (192.168.50.1)\n*Jan  5 16:01:15.571: %SYS-5-CONFIG_I: Configured from console by admin on vty0 (192.168.50.1)",
+        "ssh_info": "SSH Enabled - version 1.99\nAuthentication timeout: 120 secs; Authentication retries: 3\nMinimum expected Diffie Hellman key size : 1024 bits"
+    },
+    "192.168.50.4": {
+        "device_info": {
+            "host": "192.168.50.4",
+            "platform": "cisco_ios",
+            "uptime": "R3 uptime is 4 hours, 50 minutes",
+            "memory_usage": {
+                "Free Memory": "Head"
+            }
+        },
+        "interfaces_info": [
+            {
+                "interface": "FastEthernet0/0",
+                "ip_address": "192.168.50.4",
+                "status": "manual",
+                "protocol": "up"
+            }
+        ],
+        "logs_info": "           ^\n% Invalid input detected at '^' marker.\n",
+        "ssh_info": "SSH Enabled - version 1.99\nAuthentication timeout: 120 secs; Authentication retries: 3\nMinimum expected Diffie Hellman key size : 1024 bits"
+    }
+}

@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Monitor</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js"></script>
+    <style>
+        :root {
+            --primary-color: #4f46e5;
+            --secondary-color: #06b6d4;
+            --success-color: #059669;
+            --warning-color: #d97706;
+            --error-color: #dc2626;
+        }
+    
+        body {
+            background-color: #f3f4f6;
+        }
+    
+        .gradient-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin-bottom: 2rem;
+        }
+    
+        .table-cell-padding {
+            padding: 1rem 1.5rem;
+        }
+    
+        .table-header-cell {
+            padding: 1rem 1.5rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            background-color: #f8fafc;
+            border-bottom: 2px solid #e2e8f0;
+        }
+    
+        .section-header {
+            background: linear-gradient(to right, #f8fafc, #f1f5f9);
+            border-bottom: 2px solid #e2e8f0;
+            color: var(--primary-color);
+        }
+    
+        .status-up {
+            color: var(--success-color);
+            font-weight: 600;
+        }
+    
+        .status-down {
+            color: var(--error-color);
+            font-weight: 600;
+        }
+    
+        .table-row-hover:hover {
+            background-color: #f8fafc;
+            transition: background-color 0.2s ease;
+        }
+    
+        .pre-formatted {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            padding: 1rem;
+            line-height: 1.6;
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+        }
+    
+        .panel-gradient {
+            background: linear-gradient(to right, #ffffff, #f8fafc);
+            border-left: 4px solid var(--primary-color);
+        }
+    </style>
+    </head>
+
+<body class="bg-gray-100">
+    <div class="container mx-auto px-6 py-8">
+        <div class="gradient-header">
+            <h1 class="text-3xl font-bold">Network Monitor</h1>
+        </div>
+        <!-- Control Panel -->
+        <div class="bg-white rounded-lg shadow p-8 mb-8">
+            <h2 class="text-xl font-semibold mb-6">Control Panel</h2>
+            <div class="space-x-4">
+                <button onclick="fetchNetworkInfo()"
+                    class="bg-blue-500 text-white px-6 py-3 rounded hover:bg-blue-600 transition-colors">
+                    Fetch Network Info
+                </button>
+                <button onclick="showHistory()"
+                    class="bg-green-500 text-white px-6 py-3 rounded hover:bg-green-600 transition-colors">
+                    Show History
+                </button>
+                <button onclick="toggleView()"
+                    class="bg-purple-500 text-white px-6 py-3 rounded hover:bg-purple-600 transition-colors">
+                    Toggle View
+                </button>
+            </div>
+        </div>
+    
+        <!-- Status Panel -->
+        <div id="statusPanel" class="hidden bg-white rounded-lg shadow-lg p-8 mb-8 panel-gradient">
+            <h2 class="text-xl font-semibold mb-4 text-indigo-600">Status</h2>
+            <div id="statusMessage" class="text-gray-700"></div>
+        </div>
+        
+        <!-- Results Panel -->
+        <div id="resultsPanel" class="hidden">
+            <!-- Table View -->
+            <div id="tableView" class="space-y-8">
+                <!-- Device Summary -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden section-spacing panel-gradient">
+                    <h3 class="text-lg font-semibold p-6 section-header">Device Summary</h3>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full">
+                            <thead>
+                                <tr>
+                                    <th class="table-header-cell text-left text-indigo-600">Host</th>
+                                    <th class="table-header-cell text-left text-indigo-600">Platform</th>
+                                    <th class="table-header-cell text-left text-indigo-600">Uptime</th>
+                                    <th class="table-header-cell text-left text-indigo-600">Memory</th>
+                                </tr>
+                            </thead>
+                            <tbody id="deviceSummaryBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+        
+                <!-- Interfaces -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden section-spacing panel-gradient">
+                    <h3 class="text-lg font-semibold p-6 section-header">Interface Status</h3>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full">
+                            <thead>
+                                <tr>
+                                    <th class="table-header-cell text-left text-indigo-600">Host</th>
+                                    <th class="table-header-cell text-left text-indigo-600">Interface</th>
+                                    <th class="table-header-cell text-left text-indigo-600">IP Address</th>
+                                    <th class="table-header-cell text-left text-indigo-600">Status</th>
+                                    <th class="table-header-cell text-left text-indigo-600">Protocol</th>
+                                </tr>
+                            </thead>
+                            <tbody id="interfacesBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+        
+                <!-- Logs -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden section-spacing panel-gradient">
+                    <h3 class="text-lg font-semibold p-6 section-header">Recent Logs</h3>
+                    <div id="logsBody" class="p-6 space-y-6"></div>
+                </div>
+        
+                <!-- SSH Info -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden section-spacing panel-gradient">
+                    <h3 class="text-lg font-semibold p-6 section-header">SSH Configuration</h3>
+                    <div id="sshBody" class="p-6"></div>
+                </div>
+            </div>
+        
+            <!-- Raw JSON View -->
+            <div id="jsonView" class="hidden bg-white rounded-lg shadow-lg panel-gradient">
+                <div class="p-8">
+                    <h2 class="text-xl font-semibold mb-4 text-indigo-600">Raw JSON</h2>
+                    <div id="editor" style="height: 500px; border-radius: 0.5rem;"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- History Panel -->
+        <div id="historyPanel" class="hidden bg-white rounded-lg shadow-lg p-8 mt-8 panel-gradient">
+            <h2 class="text-xl font-semibold mb-6 text-indigo-600">History</h2>
+            <div id="historyList" class="space-y-3"></div>
+        </div>
+        </div>
+        
+        <script>
+            const editor = ace.edit("editor");
+            editor.setTheme("ace/theme/monokai");
+            editor.getSession().setMode("ace/mode/json");
+            editor.setReadOnly(true);
+
+            let currentView = 'table';
+
+            function toggleView() {
+                const tableView = document.getElementById('tableView');
+                const jsonView = document.getElementById('jsonView');
+
+                if (currentView === 'table') {
+                    tableView.classList.add('hidden');
+                    jsonView.classList.remove('hidden');
+                    currentView = 'json';
+                } else {
+                    tableView.classList.remove('hidden');
+                    jsonView.classList.add('hidden');
+                    currentView = 'table';
+                }
+            }
+
+            function showStatus(message, isError = false) {
+                const statusPanel = document.getElementById('statusPanel');
+                const statusMessage = document.getElementById('statusMessage');
+                statusPanel.classList.remove('hidden');
+                statusMessage.className = isError ? 'text-red-600 font-medium' : 'text-emerald-600 font-medium';
+                statusMessage.textContent = message;
+            }
+
+            function updateDeviceSummary(data) {
+                const tbody = document.getElementById('deviceSummaryBody');
+                tbody.innerHTML = '';
+
+                Object.entries(data).forEach(([host, info]) => {
+                    const row = document.createElement('tr');
+                    row.className = 'table-row-hover';
+                    row.innerHTML = `
+                            <td class="table-cell-padding text-indigo-600 font-medium">${host}</td>
+                            <td class="table-cell-padding">${info.device_info.platform}</td>
+                            <td class="table-cell-padding">${info.device_info.uptime}</td>
+                            <td class="table-cell-padding">${JSON.stringify(info.device_info.memory_usage)}</td>
+                        `;
+                    tbody.appendChild(row);
+                });
+            }
+
+            function updateInterfaces(data) {
+                const tbody = document.getElementById('interfacesBody');
+                tbody.innerHTML = '';
+
+                Object.entries(data).forEach(([host, info]) => {
+                    info.interfaces_info.forEach(iface => {
+                        const row = document.createElement('tr');
+                        row.className = 'table-row-hover';
+                        const statusClass = iface.protocol === 'up' ? 'status-up' : 'status-down';
+                        row.innerHTML = `
+                                <td class="table-cell-padding text-indigo-600 font-medium">${host}</td>
+                                <td class="table-cell-padding">${iface.interface}</td>
+                                <td class="table-cell-padding">${iface.ip_address}</td>
+                                <td class="table-cell-padding">${iface.status}</td>
+                                <td class="table-cell-padding ${statusClass}">${iface.protocol}</td>
+                            `;
+                        tbody.appendChild(row);
+                    });
+                });
+            }
+
+            function updateLogs(data) {
+                const logsBody = document.getElementById('logsBody');
+                logsBody.innerHTML = '';
+
+                Object.entries(data).forEach(([host, info]) => {
+                    const logSection = document.createElement('div');
+                    logSection.className = 'bg-gray-50 rounded-lg p-6 shadow-md';
+                    logSection.innerHTML = `
+                            <h4 class="font-medium mb-4 text-lg text-indigo-600">Device: ${host}</h4>
+                            <pre class="pre-formatted">${info.logs_info}</pre>
+                        `;
+                    logsBody.appendChild(logSection);
+                });
+            }
+
+            function updateSSH(data) {
+                const sshBody = document.getElementById('sshBody');
+                sshBody.innerHTML = '';
+
+                Object.entries(data).forEach(([host, info]) => {
+                    const sshSection = document.createElement('div');
+                    sshSection.className = 'bg-gray-50 rounded-lg p-6 shadow-md mb-4';
+                    sshSection.innerHTML = `
+                            <h4 class="font-medium mb-4 text-lg text-indigo-600">Device: ${host}</h4>
+                            <pre class="pre-formatted">${info.ssh_info}</pre>
+                        `;
+                    sshBody.appendChild(sshSection);
+                });
+            }
+
+        async function fetchNetworkInfo() {
+            showStatus('Fetching network information...');
+            try {
+                const response = await fetch('/api/network/info');
+                const result = await response.json();
+
+                if (result.status === 'success') {
+                    // Update both views
+                    editor.setValue(JSON.stringify(result.data, null, 2));
+                    updateDeviceSummary(result.data);
+                    updateInterfaces(result.data);
+                    updateLogs(result.data);
+                    updateSSH(result.data);
+
+                    document.getElementById('resultsPanel').classList.remove('hidden');
+                    showStatus('Network information fetched successfully');
+                } else {
+                    showStatus('Error: ' + result.message, true);
+                }
+            } catch (error) {
+                showStatus('Error: ' + error.message, true);
+            }
+        }
+
+        async function showHistory() {
+            const historyPanel = document.getElementById('historyPanel');
+            const historyList = document.getElementById('historyList');
+            historyPanel.classList.remove('hidden');
+
+            try {
+                const response = await fetch('/api/network/history');
+                const files = await response.json();
+
+                historyList.innerHTML = files.map(file => `
+                    <div class="flex items-center justify-between bg-gray-50 p-3 rounded">
+                        <span class="text-gray-700">${file}</span>
+                        <button onclick="loadFile('${file}')" 
+                                class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 text-sm">
+                            Load
+                        </button>
+                    </div>
+                `).join('');
+            } catch (error) {
+                showStatus('Error loading history: ' + error.message, true);
+            }
+        }
+
+        async function loadFile(filename) {
+            try {
+                const response = await fetch(`/api/network/file/${filename}`);
+                const data = await response.json();
+
+                // Update both views
+                editor.setValue(JSON.stringify(data, null, 2));
+                updateDeviceSummary(data);
+                updateInterfaces(data);
+                updateLogs(data);
+                updateSSH(data);
+
+                document.getElementById('resultsPanel').classList.remove('hidden');
+                showStatus(`Loaded file: ${filename}`);
+            } catch (error) {
+                showStatus('Error loading file: ' + error.message, true);
+            }
+        }
+    </script>
+</body>
+
+</html>

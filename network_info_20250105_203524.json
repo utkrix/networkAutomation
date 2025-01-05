@@ -1,0 +1,11 @@
+{
+    "192.168.50.2": {
+        "error": "Failed to connect: TCP connection to device failed.\n\nCommon causes of this problem are:\n1. Incorrect hostname or IP address.\n2. Wrong TCP port.\n3. Intermediate firewall blocking access.\n\nDevice settings: cisco_ios 192.168.50.2:22\n\n"
+    },
+    "192.168.50.3": {
+        "error": "Failed to connect: TCP connection to device failed.\n\nCommon causes of this problem are:\n1. Incorrect hostname or IP address.\n2. Wrong TCP port.\n3. Intermediate firewall blocking access.\n\nDevice settings: cisco_ios 192.168.50.3:22\n\n"
+    },
+    "192.168.50.4": {
+        "error": "Failed to connect: TCP connection to device failed.\n\nCommon causes of this problem are:\n1. Incorrect hostname or IP address.\n2. Wrong TCP port.\n3. Intermediate firewall blocking access.\n\nDevice settings: cisco_ios 192.168.50.4:22\n\n"
+    }
+}
